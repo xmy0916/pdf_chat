@@ -17,7 +17,7 @@ def create_db(pdfs):
 
 def search_most_similarity_content(db, query):
     docs = db.similarity_search(query)
-    content = "\n".join([x.page_content for x in docs])
-    qa_prompt = "Use the following pieces of context to answer the user's question. If you don't know the answer, just say that you don't know, don't try to make up an answer.----------------"
+    content = "\n".join([x.page_content for x in docs])[:2000]
+    qa_prompt = "Use the following pieces of context to answer the user's question. If you don't know the answer, just say that you can't find answer in the pdf, don't try to make up an answer.----------------"
     input_text = qa_prompt+"\nContext:"+content+"\nUser question:\n"+query
     return input_text
